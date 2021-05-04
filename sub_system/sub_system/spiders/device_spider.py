@@ -1,13 +1,19 @@
+
 import scrapy
 import re
 
 from scrapy.http.request import Request
 from ..items import DeviceItem
 from selenium import webdriver
-
+from ..pipelines import SubSystemPipeline
 
 class DeviceSpider(scrapy.Spider):
     name = 'device_spider'
+    custom_settings={
+        'ITEM_PIPELINES':{
+          'sub_system.pipelines.JsonPipeline': 200
+        }
+    }
     allowed_domains = ['159.226.153.63']
     start_urls = ['http://159.226.153.63/baseinfo/posm_list.aspx']
     callback_func=[] #与start_url对应的回调函数
@@ -43,7 +49,6 @@ class DeviceSpider(scrapy.Spider):
 
         self.callback_func.append(self.startParseDevicePages)
 
-        a=1
         # 开始爬取所有页面
         for i in range(len(self.start_urls)):
             yield scrapy.FormRequest(self.start_urls[i], cookies=self.cookies, callback=self.callback_func[i], dont_filter=True)
@@ -51,33 +56,35 @@ class DeviceSpider(scrapy.Spider):
 
     def startParseDevicePages(self, response):
         # 获得设备页面总数
-        # self.device_num_info_raw = response.xpath(
-        #     '//div[@class="form-inline"]')
         self.device_num_info_raw = response.xpath('//div[@class="form-inline"]/div[@style="text-align:left; float:left;"]/text()').extract()[0]
         self.device_total_idx = int(re.findall(
             r'[/](\d+?)[页]', self.device_num_info_raw)[0])
-        parse=self.parseDevicePage(response)
-        next(parse)
+
+        for idx in range(int(self.device_total_idx)):
+            next_url = self.start_urls[0]+'?page='+str(idx+1)
+            yield scrapy.Request(next_url, callback=self.parseDevicePage)
+
 
     def errback(self, failure):
         self.logger.error(repr(failure))
 
     def __eliminateSpace(self,text):
         return re.sub('\s+','',text).strip()
+
+    # def parseDevice(self,response):
+
     def parseDevicePage(self, response):
         rows = response.xpath('//table[@class="gv"]/tbody/tr')
-        cnt = 0
         for row in rows:
-            cnt += 1
             # 注意要在td前面加上"./"，表示此td是node_list的下一级
-            name = row.xpath('./td[2]/text()').extract_first()
-            id = row.xpath('./td[3]/text()').extract_first()
-            phone = row.xpath('./td[4]/text()').extract_first()
-            type = row.xpath('./td[5]/text()').extract_first()
+            name = self.__eliminateSpace(row.xpath('./td[2]/text()').extract_first())
+            id = self.__eliminateSpace(row.xpath('./td[3]/text()').extract_first())
+            phone = self.__eliminateSpace(row.xpath('./td[4]/text()').extract_first())
+            type = self.__eliminateSpace(row.xpath('./td[5]/text()').extract_first())
             model = self.__eliminateSpace(row.xpath('./td[6]/text()').extract_first())
             position=self.__eliminateSpace(row.xpath('./td[7]/text()').extract_first())
             image_url = self.__eliminateSpace(row.xpath('./td[8]/text()').extract_first())
-            belong_to = row.xpath('./td[9]/text()').extract_first()
+            belong_to = self.__eliminateSpace((row.xpath('./td[9]/text()').extract_first()))
             device_info = DeviceItem()
             device_info['name'] = name if name else ""
             device_info['id'] = id if id else ""
@@ -89,7 +96,7 @@ class DeviceSpider(scrapy.Spider):
             device_info['belong_to'] = belong_to if belong_to else ""
             yield device_info
 
-        cur_idx = re.findall(r'[,](\d+?)[/]', self.device_num_info_raw)[0]
-        if int(cur_idx) < self.device_total_idx:
-            next_url = self.start_urls[1]+'?page='+cur_idx
-            yield scrapy.Request(next_url, callback=self.parseDevicePage)
+        # cur_idx = re.findall(r'[,](\d+?)[/]', self.device_num_info_raw)[0]
+        # if int(cur_idx) < self.device_total_idx:
+        #     next_url = self.start_urls[1]+'?page='+cur_idx
+        #     yield scrapy.Request(next_url, callback=self.parseDevicePage)
