@@ -66,7 +66,11 @@ DEFAULT_REQUEST_HEADERS = {
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'sub_system.pipelines.JsonPipeline': 200,
-    'sub_system.pipelines.SubSystemPipeline': 300
+    'sub_system.pipelines.SubSystemPipeline': 300,
+    'sub_system.pipelines.flowAreaAPipeline': 200,
+    'sub_system.pipelines.flowAreaBPipeline': 200,
+    'sub_system.pipelines.portableDevicePipeline': 200,
+    'sub_system.pipelines.sleetPipeline': 200
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

@@ -21,4 +21,44 @@ class DeviceItem(scrapy.Item):
     photo=scrapy.Field() #现场照片
     belong_to=scrapy.Field() #所属监测站
 
+class flowAreaAItem(scrapy.Item):
+    id = scrapy.Field() # 序号
+    name = scrapy.Field() # 观测点名称
+    deviceId = scrapy.Field() # 设备编号
+    date = scrapy.Field() # 监测日期
+    time = scrapy.Field() # 检测时间
+    flow = scrapy.Field() # 径流量
+    oneFlow = scrapy.Field() # 单次测试流量
+    sandMeasure = scrapy.Field() # 含沙量
 
+class flowAreaBItem(scrapy.Item):
+    id = scrapy.Field() # 序号
+    name = scrapy.Field() # 观测点名称
+    deviceId = scrapy.Field() # 设备编号
+    date = scrapy.Field() # 监测日期
+    time = scrapy.Field() # 检测时间
+    flow = scrapy.Field() # 径流量
+    oneFlow = scrapy.Field() # 单次测试流量
+    sandMeasure = scrapy.Field() # 含沙量
+
+class portableDeviceItem(scrapy.Item):
+    id = scrapy.Field() # 序号
+    name = scrapy.Field() # 监测点名字
+    deviceId = scrapy.Field() # 设备编号
+    projectId = scrapy.Field() # 工程编号
+    date = scrapy.Field() # 检测日期
+    longitude = scrapy.Field() # 经度
+    latitude = scrapy.Field() # 纬度
+    sandMeasure = scrapy.Field() # 含沙量
+
+class sleetItem(scrapy.Item):
+    id = scrapy.Field() # 序号
+    name = scrapy.Field() # 监测点名称
+    deviceId = scrapy.Field() # 设备编号
+    date = scrapy.Field() # 监测日期
+    longitude = scrapy.Field()  # 经度
+    latitude = scrapy.Field()  # 纬度
+    temperature = scrapy.Field() # 温度
+    humidity = scrapy.Field() # 湿度
+    rainSnow = scrapy.Field() # 降雨雪量
+    duration = scrapy.Field() # 时长
