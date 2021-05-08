@@ -1,3 +1,5 @@
+import json
+
 import scrapy
 import re
 from selenium import webdriver
@@ -20,6 +22,9 @@ class PortableDeviceSpider(scrapy.Spider):
     username = 'fangshan'
     password = '123456'
     cookies = {}
+    oldtime = ''  # 本地存储的最新时间
+    newtime = ''  # 记录爬取的所有数据中最新的时间
+    dictime = {}  # 从本地文件中获取到的时间字典
 
     def __init__(self):
         # 处理免密登录
@@ -42,6 +47,7 @@ class PortableDeviceSpider(scrapy.Spider):
             str = elem.split(':')
             self.cookies[str[0]] = str[1]
         browser.close()
+        self.getOldtime()
 
     def start_requests(self):
         yield scrapy.FormRequest(self.start_urls[0], cookies=self.cookies, callback=self.parseTotalPage,
@@ -63,7 +69,10 @@ class PortableDeviceSpider(scrapy.Spider):
         for tagTr in tagTbody:
             if type(tagTr) == bs4.NavigableString:
                 continue
-            yield self.extractData(tagTr)
+            item = self.extractData(tagTr)
+            if item == None:
+                break
+            yield item
 
     def extractData(self, tag):
         # 从数据组件中提取数据
@@ -78,4 +87,29 @@ class PortableDeviceSpider(scrapy.Spider):
         item['longitude'] = tagTdList[7].string.strip()
         item['latitude'] = tagTdList[8].string.strip()
         item['sandMeasure'] = tagTdList[9].string.strip()
-        return item
+        nowtime = item['date']
+        if nowtime > self.oldtime:
+            if nowtime > self.newtime:
+                self.newtime = nowtime
+            return item
+        else:
+            return None
+
+    def close(spider, reason):
+        # 爬虫关闭时更新时间
+        spider.updateNewTime()
+
+    def getOldtime(self):
+        # 从本地文件中获取oldtime
+        file = open('time.json', 'r', encoding='utf-8')
+        self.dictime = json.load(file)
+        self.oldtime = self.dictime['portableDeviceTime']
+        self.newtime = self.oldtime
+        file.close()
+
+    def updateNewTime(self):
+        # 更新本地文件时间记录
+        file = open('time.json', 'w', encoding='utf-8')
+        self.dictime['portableDeviceTime'] = self.newtime
+        file.write(json.dumps(self.dictime))
+        file.close()

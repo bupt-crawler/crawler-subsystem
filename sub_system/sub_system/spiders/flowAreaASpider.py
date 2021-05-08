@@ -5,6 +5,8 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 import sys
 import bs4
+import json
+
 
 class FlowAreaASpider(scrapy.Spider):
     name = 'flowAreaASpider'
@@ -19,6 +21,9 @@ class FlowAreaASpider(scrapy.Spider):
     username = 'fangshan'
     password = '123456'
     cookies = {}
+    oldtime = ''  # 本地存储的最新时间
+    newtime = ''  # 记录爬取的所有数据中最新的时间
+    dictime = {}  # 从本地文件中获取到的时间字典
 
     def __init__(self):
         # 处理免密登录
@@ -41,16 +46,18 @@ class FlowAreaASpider(scrapy.Spider):
             str = elem.split(':')
             self.cookies[str[0]] = str[1]
         browser.close()
+        self.getOldtime()
 
     def start_requests(self):
-        yield scrapy.FormRequest(self.start_urls[0], cookies=self.cookies, callback=self.parseTotalPage, dont_filter=True)
+        yield scrapy.FormRequest(self.start_urls[0], cookies=self.cookies, callback=self.parseTotalPage,
+                                 dont_filter=True)
 
     def parseTotalPage(self, response):
         # 获取总页数
         soup = BeautifulSoup(response.text, "lxml")
         tag = soup.find('div', style='text-align:left; float:left;')
         totalPage = int(re.search(r'/\d+页', tag.string).group(0)[1:-1])
-        for i in range(1, totalPage+1):
+        for i in range(1, totalPage + 1):
             url = self.start_urls[0] + '?page=' + str(i)
             yield scrapy.FormRequest(url, cookies=self.cookies, callback=self.parseOnePage, dont_filter=True)
 
@@ -61,7 +68,11 @@ class FlowAreaASpider(scrapy.Spider):
         for tagTr in tagTbody:
             if type(tagTr) == bs4.NavigableString:
                 continue
-            yield self.extractData(tagTr)
+            item = self.extractData(tagTr)
+            # 当检测到None时，跳出循环
+            if item == None:
+                break
+            yield item
 
     def extractData(self, tag):
         # 从数据组件中提取数据
@@ -75,4 +86,32 @@ class FlowAreaASpider(scrapy.Spider):
         item['flow'] = tagTdList[7].string.strip()
         item['oneFlow'] = tagTdList[8].string.strip()
         item['sandMeasure'] = tagTdList[9].string.strip()
-        return item
+        nowtime = item['date'] + ' ' + item['time']
+
+        # 当本条数据的时间新于本地文件中存储的时间时，才返回item，否则返回None
+        if nowtime > self.oldtime:
+            # 保留最新的时间
+            if nowtime > self.newtime:
+                self.newtime = nowtime
+            return item
+        else:
+            return None
+
+    def close(spider, reason):
+        # 爬虫关闭时更新时间
+        spider.updateNewTime()
+
+    def getOldtime(self):
+        # 从本地文件中获取oldtime
+        file = open('time.json', 'r', encoding='utf-8')
+        self.dictime = json.load(file)
+        self.oldtime = self.dictime['flowAreaATime']
+        self.newtime = self.oldtime
+        file.close()
+
+    def updateNewTime(self):
+        # 更新本地文件时间记录
+        file = open('time.json', 'w', encoding='utf-8')
+        self.dictime['flowAreaATime'] = self.newtime
+        file.write(json.dumps(self.dictime))
+        file.close()

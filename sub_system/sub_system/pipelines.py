@@ -55,7 +55,7 @@ class SubSystemPipeline:
 
 class flowAreaAPipeline:
     def __init__(self):
-        self.file = codecs.open('flowAreaA.json', 'w', encoding='utf-8')
+        self.file = codecs.open('flowAreaA.json', 'a', encoding='utf-8')
 
     def process_item(self, item, spider):
         self.file.write(json.dumps(dict(item), ensure_ascii=False) + '\n')
@@ -66,7 +66,7 @@ class flowAreaAPipeline:
 
 class flowAreaBPipeline:
     def __init__(self):
-        self.file = codecs.open('flowAreaB.json', 'w', encoding='utf-8')
+        self.file = codecs.open('flowAreaB.json', 'a', encoding='utf-8')
 
     def process_item(self, item, spider):
         self.file.write(json.dumps(dict(item), ensure_ascii=False) + '\n')
@@ -77,7 +77,7 @@ class flowAreaBPipeline:
 
 class portableDevicePipeline:
     def __init__(self):
-        self.file = codecs.open('portableDevice.json', 'w', encoding='utf-8')
+        self.file = codecs.open('portableDevice.json', 'a', encoding='utf-8')
 
     def process_item(self, item, spider):
         self.file.write(json.dumps(dict(item), ensure_ascii=False) + '\n')
@@ -88,7 +88,7 @@ class portableDevicePipeline:
 
 class sleetPipeline:
     def __init__(self):
-        self.file = codecs.open('sleet.json', 'w', encoding='utf-8')
+        self.file = codecs.open('sleet.json', 'a', encoding='utf-8')
 
     def process_item(self, item, spider):
         self.file.write(json.dumps(dict(item), ensure_ascii=False) + '\n')
