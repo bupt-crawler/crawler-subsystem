@@ -96,3 +96,25 @@ class sleetPipeline:
 
     def spider_closed(self, spider):
         self.file.close()
+
+class device1HistoryPipeline:
+    def __init__(self):
+        self.file = codecs.open('device1History.json', 'a', encoding='utf-8')
+
+    def process_item(self, item, spider):
+        self.file.write(json.dumps(dict(item), ensure_ascii=False) + '\n')
+        return item
+
+    def spider_closed(self, spider):
+        self.file.close()
+
+class device2HistoryPipeline:
+    def __init__(self):
+        self.file = codecs.open('device2History.json', 'a', encoding='utf-8')
+
+    def process_item(self, item, spider):
+        self.file.write(json.dumps(dict(item), ensure_ascii=False) + '\n')
+        return item
+
+    def spider_closed(self, spider):
+        self.file.close()

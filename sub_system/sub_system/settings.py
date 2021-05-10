@@ -70,7 +70,9 @@ ITEM_PIPELINES = {
     'sub_system.pipelines.flowAreaAPipeline': 200,
     'sub_system.pipelines.flowAreaBPipeline': 200,
     'sub_system.pipelines.portableDevicePipeline': 200,
-    'sub_system.pipelines.sleetPipeline': 200
+    'sub_system.pipelines.sleetPipeline': 200,
+    'sub_system.pipelines.device1HistoryPipeline': 200,
+    'sub_system.pipelines.device2HistoryPipeline': 200
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

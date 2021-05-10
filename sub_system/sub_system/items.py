@@ -62,3 +62,28 @@ class sleetItem(scrapy.Item):
     humidity = scrapy.Field() # 湿度
     rainSnow = scrapy.Field() # 降雨雪量
     duration = scrapy.Field() # 时长
+
+class device1HistoryItem(scrapy.Item):
+    id = scrapy.Field() # 编号
+    date = scrapy.Field() # 日期
+    sandMeasureId = scrapy.Field() # 泥沙测量编号
+    genFlowSpace = scrapy.Field() # 产流体积
+    sandContent = scrapy.Field() # 泥沙含量
+    drySandLoss = scrapy.Field() # 干泥沙流失量
+    rainfall = scrapy.Field() # 雨量
+    runoffWeight = scrapy.Field() # 产流重量
+    runoffDensity = scrapy.Field() # 径流密度
+    deviceV = scrapy.Field() # 设备电压
+    errorCode = scrapy.Field() # 故障码
+
+class device2HistoryItem(scrapy.Item):
+    id = scrapy.Field()  # 编号
+    date = scrapy.Field()  # 日期
+    sandMeasureId = scrapy.Field()  # 泥沙测量编号
+    genFlowSpace = scrapy.Field()  # 产流体积
+    sandContent = scrapy.Field()  # 泥沙含量
+    drySandLoss = scrapy.Field()  # 干泥沙流失量
+    runoffWeight = scrapy.Field()  # 产流重量
+    runoffDensity = scrapy.Field()  # 径流密度
+    deviceV = scrapy.Field()  # 设备电压
+    errorCode = scrapy.Field()  # 故障码
