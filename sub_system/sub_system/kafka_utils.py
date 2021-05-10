@@ -9,12 +9,11 @@ SLEET_TOPIC = 'sleet'
 producer = KafkaProducer(bootstrap_servers=KAFKA_HOST)
 
 
-def send(topic, value=None, key=None):
+def send(topic, value, key=None):
     k, v = None, None
     if k is not None:
         k = str.encode(key)
-    if v is not None:
-        v = str.encode(value)
+    v = str.encode(value)
     future = producer.send(topic, v, k, partition=0)
     return future.get(timeout=10)
 
