@@ -6,6 +6,7 @@ from scrapy.http.request import Request
 from ..items import DeviceItem
 from selenium import webdriver
 from ..pipelines import SubSystemPipeline
+import json
 
 class DeviceSpider(scrapy.Spider):
     name = 'device_spider'
@@ -24,6 +25,10 @@ class DeviceSpider(scrapy.Spider):
     device_num_info_raw = ''  # 设备页面原始信息 (“总**页”)
     device_total_idx = 0  # 设备页面的页数
     cookies = {}
+
+    oldtime = ''  # 本地存储的最新时间
+    newtime = ''  # 记录爬取的所有数据中最新的时间
+    dictime = {}  # 从本地文件中获取到的时间字典
 
     def start_requests(self):
         browser = webdriver.Firefox()
@@ -46,7 +51,7 @@ class DeviceSpider(scrapy.Spider):
             self.cookies[str[0]] = str[1]
 
         browser.close()
-
+        self.getOldtime()
         self.callback_func.append(self.startParseDevicePages)
 
         # 开始爬取所有页面
@@ -71,8 +76,6 @@ class DeviceSpider(scrapy.Spider):
     def __eliminateSpace(self,text):
         return re.sub('\s+','',text).strip()
 
-    # def parseDevice(self,response):
-
     def parseDevicePage(self, response):
         rows = response.xpath('//table[@class="gv"]/tbody/tr')
         for row in rows:
@@ -94,9 +97,6 @@ class DeviceSpider(scrapy.Spider):
             device_info['location'] = position if position else ""
             device_info['photo'] = image_url if image_url else ""
             device_info['belong_to'] = belong_to if belong_to else ""
-            yield device_info
+       
 
-        # cur_idx = re.findall(r'[,](\d+?)[/]', self.device_num_info_raw)[0]
-        # if int(cur_idx) < self.device_total_idx:
-        #     next_url = self.start_urls[1]+'?page='+cur_idx
-        #     yield scrapy.Request(next_url, callback=self.parseDevicePage)
+    
