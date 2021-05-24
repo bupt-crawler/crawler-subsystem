@@ -1,5 +1,5 @@
+# encoding: utf-8
 import json
-
 import scrapy
 import re
 from selenium import webdriver

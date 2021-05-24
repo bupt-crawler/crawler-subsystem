@@ -12,7 +12,7 @@ class DeviceSpider(scrapy.Spider):
     name = 'device_spider'
     custom_settings={
         'ITEM_PIPELINES':{
-          'sub_system.pipelines.JsonPipeline': 200
+          'sub_system.pipelines.DevicePipeline': 200
         }
     }
     allowed_domains = ['159.226.153.63']

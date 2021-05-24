@@ -1,3 +1,4 @@
+# encoding: utf-8
 import scrapy
 import re
 from ..items import DeviceItem, flowAreaAItem

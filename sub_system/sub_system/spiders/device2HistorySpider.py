@@ -1,3 +1,4 @@
+# encoding: utf-8
 import scrapy
 import json
 import re
@@ -8,7 +9,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 
 from sub_system.items import device2HistoryItem
-
+from selenium.webdriver.firefox.options import Options
 
 class Device2historyspiderSpider(scrapy.Spider):
     name = 'device2HistorySpider'
@@ -30,7 +31,9 @@ class Device2historyspiderSpider(scrapy.Spider):
         username = "20200529"
         password = "123456"
 
-        self.browser = webdriver.Firefox()
+        options = webdriver.FirefoxOptions()
+        options.set_headless()
+        self.browser=webdriver.Firefox(firefox_options=options,executable_path='/usr/bin/geckodriver')
         self.browser.get(url)
         # 输入账号
         self.browser.find_element_by_xpath(

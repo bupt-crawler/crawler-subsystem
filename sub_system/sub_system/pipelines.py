@@ -11,9 +11,9 @@ import json
 from collections import Counter
 
 
-class JsonPipeline:
+class DevicePipeline:
     def __init__(self):
-        self.file = codecs.open('Json_data.json', 'w', encoding='utf-8')
+        self.file = codecs.open('device_data.json', 'w', encoding='utf-8')
 
     def process_item(self, item, spider):
         info = {}
