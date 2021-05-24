@@ -1,0 +1,1 @@
+crontab –e【等同于： `vim` `/var/spool/cron/root`】
