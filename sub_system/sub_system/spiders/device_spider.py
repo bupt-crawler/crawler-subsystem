@@ -6,6 +6,7 @@ from scrapy.http.request import Request
 from ..items import DeviceItem
 from selenium import webdriver
 from ..pipelines import SubSystemPipeline
+from selenium.webdriver.firefox.options import Options
 
 class DeviceSpider(scrapy.Spider):
     name = 'device_spider'
@@ -24,9 +25,14 @@ class DeviceSpider(scrapy.Spider):
     device_num_info_raw = ''  # 设备页面原始信息 (“总**页”)
     device_total_idx = 0  # 设备页面的页数
     cookies = {}
+   
 
     def start_requests(self):
-        browser = webdriver.Firefox()
+        options = webdriver.FirefoxOptions()
+        options.set_headless()
+        browser=webdriver.Firefox(firefox_options=options,executable_path='/usr/bin/geckodriver')
+
+        # browser = webdriver.Firefox('/home/lighthouse/crawler-subsystem/sub_system/')
         browser.get(self.start_urls[0])
         # 输入账号
         browser.find_element_by_xpath(
