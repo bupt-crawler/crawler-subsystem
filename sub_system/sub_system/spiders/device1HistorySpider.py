@@ -24,7 +24,7 @@ class Device1historyspiderSpider(scrapy.Spider):
     newtime = ''  # 记录爬取的所有数据中最新的时间
     dictime = {}  # 从本地文件中获取到的时间字典
 
-    def __init__(self):
+    def __init__(self, **kwargs):
         # 免密登录
         url = "http://gprs.sj2000.org/Login.aspx"
         username = "20200529"
@@ -202,11 +202,11 @@ class Device1historyspiderSpider(scrapy.Spider):
 
     def getOldtime(self):
         # 从本地文件中获取oldtime
-        file = open('time.json', 'r', encoding='utf-8')
-        self.dictime = json.load(file)
-        self.oldtime = self.dictime['device1HistoryTime']
-        self.newtime = self.oldtime
-        file.close()
+        with open('time.json', 'w+', encoding='utf-8') as file:                
+            self.dictime = json.load(file)
+            self.oldtime = self.dictime['device1HistoryTime']
+            self.newtime = self.oldtime
+            file.close()
 
     def updateNewTime(self):
         # 更新本地文件时间记录

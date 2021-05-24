@@ -9,6 +9,7 @@ from ..pipelines import SubSystemPipeline
 from selenium.webdriver.firefox.options import Options
 
 class DeviceSpider(scrapy.Spider):
+
     name = 'device_spider'
     custom_settings={
         'ITEM_PIPELINES':{
@@ -25,9 +26,8 @@ class DeviceSpider(scrapy.Spider):
     device_num_info_raw = ''  # 设备页面原始信息 (“总**页”)
     device_total_idx = 0  # 设备页面的页数
     cookies = {}
-   
-
-    def start_requests(self):
+    
+    def __init__(self, **kwargs):
         options = webdriver.FirefoxOptions()
         options.set_headless()
         browser=webdriver.Firefox(firefox_options=options,executable_path='/usr/bin/geckodriver')
@@ -52,9 +52,9 @@ class DeviceSpider(scrapy.Spider):
             self.cookies[str[0]] = str[1]
 
         browser.close()
-
         self.callback_func.append(self.startParseDevicePages)
 
+    def start_requests(self):
         # 开始爬取所有页面
         for i in range(len(self.start_urls)):
             yield scrapy.FormRequest(self.start_urls[i], cookies=self.cookies, callback=self.callback_func[i], dont_filter=True)
