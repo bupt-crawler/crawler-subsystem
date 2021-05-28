@@ -97,3 +97,5 @@ ITEM_PIPELINES = {
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 TELNETCONSOLE_ENABLED=False
+
+TIME_FILE="/home/lighthouse/crawler-subsystem/sub_system/time.json"

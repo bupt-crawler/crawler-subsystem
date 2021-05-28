@@ -27,7 +27,7 @@ class SleetSpider(scrapy.Spider):
     newtime = ''  # 记录爬取的所有数据中最新的时间
     dictime = {}  # 从本地文件中获取到的时间字典
 
-    def __init__(self):
+    def __init__(self, **kwargs):
         # 处理免密登录
         options = webdriver.FirefoxOptions()
         options.set_headless()
@@ -106,7 +106,7 @@ class SleetSpider(scrapy.Spider):
 
     def getOldtime(self):
         # 从本地文件中获取oldtime
-        file = open('time.json', 'r', encoding='utf-8')
+        file = open(TIME_FILE, 'r', encoding='utf-8')
         self.dictime = json.load(file)
         self.oldtime = self.dictime['sleetTime']
         self.newtime = self.oldtime
@@ -114,7 +114,7 @@ class SleetSpider(scrapy.Spider):
 
     def updateNewTime(self):
         # 更新本地文件时间记录
-        file = open('time.json', 'w', encoding='utf-8')
+        file = open(TIME_FILE, 'w', encoding='utf-8')
         self.dictime['sleetTime'] = self.newtime
         file.write(json.dumps(self.dictime))
         file.close()
