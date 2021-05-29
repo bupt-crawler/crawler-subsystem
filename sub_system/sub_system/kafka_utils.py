@@ -25,10 +25,10 @@ def send(topic, value, key=None):
 #     send(FLOW_AREA_A_TOPIC, line)
 # flow_area_a.close()
 #
-flow_area_b = open('../flowAreaB.json', 'r', encoding='utf-8')
-for line in flow_area_b:
-    send(FLOW_AREA_B_TOPIC, line)
-flow_area_b.close()
+# flow_area_b = open('../flowAreaB.json', 'r', encoding='utf-8')
+# for line in flow_area_b:
+#     send(FLOW_AREA_B_TOPIC, line)
+# flow_area_b.close()
 #
 # portable_device = open('../portableDevice.json', 'r', encoding='utf-8')
 # for line in portable_device:
