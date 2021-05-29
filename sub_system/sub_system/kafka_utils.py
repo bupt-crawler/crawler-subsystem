@@ -1,6 +1,8 @@
 from kafka import KafkaProducer
 
 KAFKA_HOST = '112.98.239.146:9092'
+DEVICE_HISTORY_ONE = 'device_history_one'
+DEVICE_HISTORY_TWO = 'device_history_two'
 FLOW_AREA_A_TOPIC = 'flow_area_a'
 FLOW_AREA_B_TOPIC = 'flow_area_b'
 PORTABLE_DEVICE_TOPIC = 'portable_device'
@@ -23,10 +25,10 @@ def send(topic, value, key=None):
 #     send(FLOW_AREA_A_TOPIC, line)
 # flow_area_a.close()
 #
-# flow_area_b = open('../flowAreaB.json', 'r', encoding='utf-8')
-# for line in flow_area_b:
-#     send(FLOW_AREA_B_TOPIC, line)
-# flow_area_b.close()
+flow_area_b = open('../flowAreaB.json', 'r', encoding='utf-8')
+for line in flow_area_b:
+    send(FLOW_AREA_B_TOPIC, line)
+flow_area_b.close()
 #
 # portable_device = open('../portableDevice.json', 'r', encoding='utf-8')
 # for line in portable_device:
