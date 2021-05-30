@@ -10,6 +10,7 @@ from selenium import webdriver
 
 from sub_system.items import device2HistoryItem
 from selenium.webdriver.firefox.options import Options
+from sub_system.settings import *
 
 class Device2historyspiderSpider(scrapy.Spider):
     name = 'device2HistorySpider'

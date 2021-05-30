@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 import sys
 import bs4
 import json
-
+from sub_system.settings import *
 
 class FlowAreaASpider(scrapy.Spider):
     name = 'flowAreaASpider'
@@ -26,7 +26,7 @@ class FlowAreaASpider(scrapy.Spider):
     newtime = ''  # 记录爬取的所有数据中最新的时间
     dictime = {}  # 从本地文件中获取到的时间字典
 
-     def __init__(self, **kwargs):
+    def __init__(self, **kwargs):
         # 处理免密登录
         options = webdriver.FirefoxOptions()
         options.set_headless()

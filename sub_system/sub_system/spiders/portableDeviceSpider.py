@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 import sys
 import bs4
 from sub_system.items import portableDeviceItem
-
+from sub_system.settings import *
 
 class PortableDeviceSpider(scrapy.Spider):
     name = 'portableDeviceSpider'

@@ -8,6 +8,7 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 import sys
 import bs4
+from sub_system.settings import *
 
 class FlowAreaBSpider(scrapy.Spider):
     name = 'flowAreaBSpider'

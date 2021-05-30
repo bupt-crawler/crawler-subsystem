@@ -8,7 +8,7 @@ import sys
 import bs4
 
 from sub_system.items import sleetItem
-
+from sub_system.settings import *
 
 class SleetSpider(scrapy.Spider):
     name = 'sleetSpider'
