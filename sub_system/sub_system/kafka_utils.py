@@ -8,16 +8,27 @@ FLOW_AREA_B_TOPIC = 'flow_area_b'
 PORTABLE_DEVICE_TOPIC = 'portable_device'
 SLEET_TOPIC = 'sleet'
 
-producer = KafkaProducer(bootstrap_servers=KAFKA_HOST)
 
+# producer = KafkaProducer(bootstrap_servers=KAFKA_HOST)
 
-def send(topic, value, key=None):
-    k, v = None, None
-    if k is not None:
-        k = str.encode(key)
-    v = str.encode(value)
-    future = producer.send(topic, v, k, partition=0)
-    return future.get(timeout=10)
+class KafKaUtils:
+    producer = KafkaProducer(bootstrap_servers=KAFKA_HOST)
+
+    def send(self, topic, value, key=None):
+        k, v = None, None
+        if k is not None:
+            k = str.encode(key)
+        v = str.encode(value)
+        future = self.producer.send(topic, v, k, partition=0)
+        return future.get(timeout=10)
+
+# def send(producer, topic, value, key=None):
+#     k, v = None, None
+#     if k is not None:
+#         k = str.encode(key)
+#     v = str.encode(value)
+#     future = producer.send(topic, v, k, partition=0)
+#     return future.get(timeout=10)
 
 
 # flow_area_a = open('../flowAreaA.json', 'r', encoding='utf-8')

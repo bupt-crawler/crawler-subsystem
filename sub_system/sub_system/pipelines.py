@@ -8,8 +8,8 @@
 from itemadapter import ItemAdapter
 import codecs
 import json
+import sub_system.kafka_utils as kafka
 from collections import Counter
-
 
 class DevicePipeline:
     def __init__(self):
@@ -56,9 +56,11 @@ class SubSystemPipeline:
 class flowAreaAPipeline:
     def __init__(self):
         self.file = codecs.open('flowAreaA.json', 'a', encoding='utf-8')
+        self.kafkaUtils = kafka.KafKaUtils()
 
     def process_item(self, item, spider):
-        self.file.write(json.dumps(dict(item), ensure_ascii=False) + '\n')
+        # self.file.write(json.dumps(dict(item), ensure_ascii=False) + '\n')
+        self.kafkaUtils.send(kafka.FLOW_AREA_A_TOPIC, json.dumps(dict(item), ensure_ascii=False))
         return item
 
     def spider_closed(self, spider):
@@ -67,9 +69,11 @@ class flowAreaAPipeline:
 class flowAreaBPipeline:
     def __init__(self):
         self.file = codecs.open('flowAreaB.json', 'a', encoding='utf-8')
+        self.kafkaUtils = kafka.KafKaUtils()
 
     def process_item(self, item, spider):
-        self.file.write(json.dumps(dict(item), ensure_ascii=False) + '\n')
+        # self.file.write(json.dumps(dict(item), ensure_ascii=False) + '\n')
+        self.kafkaUtils.send(kafka.FLOW_AREA_B_TOPIC, json.dumps(dict(item), ensure_ascii=False))
         return item
 
     def spider_closed(self, spider):
@@ -78,9 +82,11 @@ class flowAreaBPipeline:
 class portableDevicePipeline:
     def __init__(self):
         self.file = codecs.open('portableDevice.json', 'a', encoding='utf-8')
+        self.kafkaUtils = kafka.KafKaUtils()
 
     def process_item(self, item, spider):
-        self.file.write(json.dumps(dict(item), ensure_ascii=False) + '\n')
+        # self.file.write(json.dumps(dict(item), ensure_ascii=False) + '\n')
+        self.kafkaUtils.send(kafka.PORTABLE_DEVICE_TOPIC, json.dumps(dict(item), ensure_ascii=False))
         return item
 
     def spider_closed(self, spider):
@@ -89,9 +95,11 @@ class portableDevicePipeline:
 class sleetPipeline:
     def __init__(self):
         self.file = codecs.open('sleet.json', 'a', encoding='utf-8')
+        self.kafkaUtils = kafka.KafKaUtils()
 
     def process_item(self, item, spider):
-        self.file.write(json.dumps(dict(item), ensure_ascii=False) + '\n')
+        # self.file.write(json.dumps(dict(item), ensure_ascii=False) + '\n')
+        self.kafkaUtils.send(kafka.SLEET_TOPIC, json.dumps(dict(item), ensure_ascii=False))
         return item
 
     def spider_closed(self, spider):
@@ -100,9 +108,11 @@ class sleetPipeline:
 class device1HistoryPipeline:
     def __init__(self):
         self.file = codecs.open('device1History.json', 'a', encoding='utf-8')
+        self.kafkaUtils = kafka.KafKaUtils()
 
     def process_item(self, item, spider):
-        self.file.write(json.dumps(dict(item), ensure_ascii=False) + '\n')
+        # self.file.write(json.dumps(dict(item), ensure_ascii=False) + '\n')
+        self.kafkaUtils.send(kafka.DEVICE_HISTORY_ONE, json.dumps(dict(item), ensure_ascii=False))
         return item
 
     def spider_closed(self, spider):
@@ -111,9 +121,11 @@ class device1HistoryPipeline:
 class device2HistoryPipeline:
     def __init__(self):
         self.file = codecs.open('device2History.json', 'a', encoding='utf-8')
+        self.kafkaUtils = kafka.KafKaUtils()
 
     def process_item(self, item, spider):
-        self.file.write(json.dumps(dict(item), ensure_ascii=False) + '\n')
+        # self.file.write(json.dumps(dict(item), ensure_ascii=False) + '\n')
+        self.kafkaUtils.send(kafka.DEVICE_HISTORY_TWO, json.dumps(dict(item), ensure_ascii=False))
         return item
 
     def spider_closed(self, spider):
