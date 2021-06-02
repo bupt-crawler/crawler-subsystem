@@ -1,0 +1,6 @@
+0 1 * * * cd ~/crawler-subsystem/sub_system &&  crawl device1HistorySpider >> ~/crawler-subsystem/sub_system/log/device1HistorySpider.log 2>&1
+0 1 * * * cd ~/crawler-subsystem/sub_system &&  crawl device2HistorySpider >> ~/crawler-subsystem/sub_system/log/device2HistorySpider.log 2>&1
+0 1 * * * cd ~/crawler-subsystem/sub_system &&  crawl flowAreaASpider >> ~/crawler-subsystem/sub_system/log/flowAreaASpider.log 2>&1
+0 1 * * * cd ~/crawler-subsystem/sub_system &&  crawl flowAreaBSpider >> ~/crawler-subsystem/sub_system/log/flowAreaBSpider.log 2>&1
+0 1 * * * cd ~/crawler-subsystem/sub_system &&  crawl portableDeviceSpider >> ~/crawler-subsystem/sub_system/log/portableDeviceSpider.log 2>&1
+0 1 * * * cd ~/crawler-subsystem/sub_system &&  crawl sleetSpider >> ~/crawler-subsystem/sub_system/log/sleetSpider.log 2>&1
