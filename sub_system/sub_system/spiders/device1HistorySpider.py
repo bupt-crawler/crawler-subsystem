@@ -33,7 +33,7 @@ class Device1historyspiderSpider(scrapy.Spider):
 
         options = webdriver.FirefoxOptions()
         options.set_headless()
-        self.browser=webdriver.Firefox(firefox_options=options,executable_path='/home/lighthouse/crawler-subsystem/sub_system/geckodriver')
+        self.browser=webdriver.Firefox(firefox_options=options,executable_path=DRIVER_WINDOWS)
         self.browser.get(url)
         # 输入账号
         self.browser.find_element_by_xpath(
@@ -203,7 +203,7 @@ class Device1historyspiderSpider(scrapy.Spider):
 
     def getOldtime(self):
         # 从本地文件中获取oldtime
-        file = open(TIME_FILE, 'r', encoding='utf-8')       
+        file = open(TIME_FILE_WIN, 'r', encoding='utf-8')
         self.dictime = json.load(file)
         self.oldtime = self.dictime['device1HistoryTime']
         self.newtime = self.oldtime
@@ -211,7 +211,7 @@ class Device1historyspiderSpider(scrapy.Spider):
 
     def updateNewTime(self):
         # 更新本地文件时间记录
-        file = open(TIME_FILE, 'w', encoding='utf-8')
+        file = open(TIME_FILE_WIN, 'w', encoding='utf-8')
         self.dictime['device1HistoryTime'] = self.newtime
         file.write(json.dumps(self.dictime))
         file.close()

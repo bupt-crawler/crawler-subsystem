@@ -99,3 +99,9 @@ ITEM_PIPELINES = {
 TELNETCONSOLE_ENABLED=False
 
 TIME_FILE="/home/lighthouse/crawler-subsystem/sub_system/time.json"
+
+TIME_FILE_WIN="time.json"
+
+DRIVER_LINUX="/home/lighthouse/crawler-subsystem/sub_system/geckodriver"
+
+DRIVER_WINDOWS="geckodriver.exe"
