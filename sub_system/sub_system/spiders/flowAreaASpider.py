@@ -8,6 +8,9 @@ import sys
 import bs4
 import json
 from sub_system.settings import *
+import logging
+
+logging.basicConfig(filename='flowAreaA.log', level=logging.ERROR)
 
 class FlowAreaASpider(scrapy.Spider):
     name = 'flowAreaASpider'
@@ -30,7 +33,7 @@ class FlowAreaASpider(scrapy.Spider):
         # 处理免密登录
         options = webdriver.FirefoxOptions()
         options.set_headless()
-        browser=webdriver.Firefox(firefox_options=options,executable_path='/usr/bin/geckodriver')
+        browser=webdriver.Firefox(firefox_options=options,executable_path=DRIVER_LINUX)
         
         browser.get(self.start_urls[0])
         # 输入账号
@@ -83,6 +86,7 @@ class FlowAreaASpider(scrapy.Spider):
         tagTdList = tag.contents
         item = flowAreaAItem()
         item['id'] = tagTdList[2].string.strip()
+        logging.error(item['id'] + '\n')
         item['name'] = tagTdList[3].string.strip()
         item['deviceId'] = tagTdList[4].string.strip()
         item['date'] = tagTdList[5].string.strip()
@@ -107,7 +111,7 @@ class FlowAreaASpider(scrapy.Spider):
 
     def getOldtime(self):
         # 从本地文件中获取oldtime
-        file = open(TIME_FILE, 'r', encoding='utf-8')
+        file = open(TIME_FILE_LINUX, 'r', encoding='utf-8')
         self.dictime = json.load(file)
         self.oldtime = self.dictime['flowAreaATime']
         self.newtime = self.oldtime
@@ -115,7 +119,7 @@ class FlowAreaASpider(scrapy.Spider):
 
     def updateNewTime(self):
         # 更新本地文件时间记录
-        file = open(TIME_FILE, 'w', encoding='utf-8')
+        file = open(TIME_FILE_LINUX, 'w', encoding='utf-8')
         self.dictime['flowAreaATime'] = self.newtime
         file.write(json.dumps(self.dictime))
         file.close()

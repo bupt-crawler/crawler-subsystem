@@ -31,22 +31,4 @@ class KafKaUtils:
 #     return future.get(timeout=10)
 
 
-# flow_area_a = open('../flowAreaA.json', 'r', encoding='utf-8')
-# for line in flow_area_a:
-#     send(FLOW_AREA_A_TOPIC, line)
-# flow_area_a.close()
-#
-# flow_area_b = open('../flowAreaB.json', 'r', encoding='utf-8')
-# for line in flow_area_b:
-#     send(FLOW_AREA_B_TOPIC, line)
-# flow_area_b.close()
-#
-# portable_device = open('../portableDevice.json', 'r', encoding='utf-8')
-# for line in portable_device:
-#     send(PORTABLE_DEVICE_TOPIC, line)
-# portable_device.close()
-#
-# sleet = open('../sleet.json', 'r', encoding='utf-8')
-# for line in sleet:
-#     send(SLEET_TOPIC, line)
-# sleet.close()
+

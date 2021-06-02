@@ -30,7 +30,8 @@ class PortableDeviceSpider(scrapy.Spider):
         # 处理免密登录
         options = webdriver.FirefoxOptions()
         options.set_headless()
-        browser=webdriver.Firefox(firefox_options=options,executable_path='/usr/bin/geckodriver')
+        browser = webdriver.Firefox(firefox_options=options, executable_path=DRIVER_LINUX)
+
         browser.get(self.start_urls[0])
         # 输入账号
         browser.find_element_by_xpath(
@@ -103,7 +104,7 @@ class PortableDeviceSpider(scrapy.Spider):
 
     def getOldtime(self):
         # 从本地文件中获取oldtime
-        file = open(TIME_FILE, 'r', encoding='utf-8')
+        file = open(TIME_FILE_LINUX, 'r', encoding='utf-8')
         self.dictime = json.load(file)
         self.oldtime = self.dictime['portableDeviceTime']
         self.newtime = self.oldtime
@@ -111,7 +112,7 @@ class PortableDeviceSpider(scrapy.Spider):
 
     def updateNewTime(self):
         # 更新本地文件时间记录
-        file = open(TIME_FILE, 'w', encoding='utf-8')
+        file = open(TIME_FILE_LINUX, 'w', encoding='utf-8')
         self.dictime['portableDeviceTime'] = self.newtime
         file.write(json.dumps(self.dictime))
         file.close()

@@ -1,6 +1,0 @@
-*/5 * * * * cd ~/crawler-subsystem/sub_system && /home/lighthouse/.local/bin/scrapy crawl device1HistorySpider >> /home/lighthouse/crawler-subsystem/sub_system/logs/device1HistorySpider.log 2>&1;
-*/5 * * * * cd ~/crawler-subsystem/sub_system && /home/lighthouse/.local/bin/scrapy crawl device2HistorySpider >> /home/lighthouse/crawler-subsystem/sub_system/logs/device2HistorySpider.log 2>&1;
-*/5 * * * * cd ~/crawler-subsystem/sub_system && /home/lighthouse/.local/bin/scrapy crawl flowAreaASpider >> /home/lighthouse/crawler-subsystem/sub_system/logs/flowAreaASpider.log 2>&1;
-*/5 * * * * cd ~/crawler-subsystem/sub_system && /home/lighthouse/.local/bin/scrapy crawl flowAreaBSpider >> /home/lighthouse/crawler-subsystem/sub_system/logs/flowAreaBSpider.log 2>&1;
-*/5 * * * * cd ~/crawler-subsystem/sub_system && /home/lighthouse/.local/bin/scrapy crawl portableDeviceSpider >> /home/lighthouse/crawler-subsystem/sub_system/logs/portableDeviceSpider.log 2>&1;
-*/5 * * * * cd ~/crawler-subsystem/sub_system && /home/lighthouse/.local/bin/scrapy crawl sleetSpider >> /home/lighthouse/crawler-subsystem/sub_system/logs/sleetSpider.log 2>&1;

@@ -98,4 +98,8 @@ ITEM_PIPELINES = {
 
 TELNETCONSOLE_ENABLED=False
 
-TIME_FILE="/home/lighthouse/crawler-subsystem/sub_system/time.json"
+# 设置time.json路径
+TIME_FILE_LINUX="/home/lighthouse/crawler-subsystem/sub_system/time.json"
+
+DRIVER_LINUX="/home/lighthouse/crawler-subsystem/sub_system/geckodriver"
+
