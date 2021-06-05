@@ -19,8 +19,8 @@ class PortableDeviceSpider(scrapy.Spider):
         }
     }
 
-    username = 'fangshan'
-    password = '123456'
+    username = SANZHI_USER
+    password = SANZHI_PASSWORD
     cookies = {}
     oldtime = ''  # 本地存储的最新时间
     newtime = ''  # 记录爬取的所有数据中最新的时间
@@ -63,7 +63,7 @@ class PortableDeviceSpider(scrapy.Spider):
         totalPage = int(re.search(r'/\d+页', tag.string).group(0)[1:-1])
         for i in range(1, totalPage + 1):
             url = self.start_urls[0] + '?page=' + str(i)
-            yield scrapy.FormRequest(url, cookies=self.cookies, callback=self.parseOnePage, dont_filter=True)
+            yield scrapy.FormRequest(url, cookies=self.cookies, callback=self.parseOnePage, dont_filter=True,priority=totalPage-i+1)
 
     def parseOnePage(self, response):
         # 获取单个页面中存放数据组件的容器组件

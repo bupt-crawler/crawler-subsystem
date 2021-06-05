@@ -1,3 +1,5 @@
+from datetime import datetime
+
 # Scrapy settings for sub_system project
 #
 # For simplicity, this file contains only settings considered important or
@@ -22,7 +24,7 @@ USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like
 ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-#CONCURRENT_REQUESTS = 32
+CONCURRENT_REQUESTS = 1
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
@@ -99,7 +101,24 @@ ITEM_PIPELINES = {
 TELNETCONSOLE_ENABLED=False
 
 # 设置time.json路径
-TIME_FILE_LINUX="/home/lighthouse/crawler-subsystem/sub_system/time.json"
+TIME_FILE_LINUX="/home/bnu/scrapy/crawler-subsystem/sub_system/time.json"
 
-DRIVER_LINUX="/home/lighthouse/crawler-subsystem/sub_system/geckodriver"
+DRIVER_LINUX="/home/bnu/scrapy/crawler-subsystem/sub_system/geckodriver"
+
+# 用户，密码
+# GPRS
+TIANHANG_USER="20200529"
+TIANHANG_PASSWORD="123456"
+# FANGSHAN
+SANZHI_USER='fangshan'
+SANZHI_PASSWORD='123456'
+
+
+# # 文件及路径，log目录需要先建好
+# today = datetime.now()
+# log_file_path = "log/scrapy_{}_{}_{}.log".format(today.year, today.month, today.day)
+# LOG_FILE = log_file_path
+
+# 日志级别 CRITICAL, ERROR, WARNING, INFO, DEBUG
+# LOG_LEVEL = 'INFO'
 

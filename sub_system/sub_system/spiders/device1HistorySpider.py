@@ -28,8 +28,8 @@ class Device1historyspiderSpider(scrapy.Spider):
     def __init__(self, **kwargs):
         # 免密登录
         url = "http://gprs.sj2000.org/Login.aspx"
-        username = "20200529"
-        password = "123456"
+        username = TIANHANG_USER
+        password = TIANHANG_PASSWORD
 
         options = webdriver.FirefoxOptions()
         options.set_headless()

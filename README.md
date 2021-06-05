@@ -3,6 +3,7 @@
 ### 配置项：
 使用前首先要配置路径，如scrapy, geckodriver等的位置
 - 在crawler-subsystem/sub_system/sub_system/settings.py中修改DRIVER_LINUX和TIME_FILE_LINUX，配置geckodriver路径和time.json的路径，其中geckodriver为浏览器驱动（selenium所需），time.json为增量爬取所需的文件，位置任意。
+- 在crawler-subsystem/sub_system/sub_system/settings.py中可以修改GPRS和FangShan的用户名和密码
 - 在crawler-subsystem/sub_system/start.sh中修改scrapy路径，logs路径，当前项目路径（均为绝对路径）
 - 在crawler-subsystem/sub_system/start.sh中修改定时时间，类型为crontab表达式
 
