@@ -101,12 +101,13 @@ ITEM_PIPELINES = {
 TELNETCONSOLE_ENABLED=False
 
 # 设置time.json路径
-TIME_FILE_LINUX="/home/bnu/scrapy/crawler-subsystem/sub_system/time.json"
+TIME_FILE_TIANHANG="/home/bnu/scrapy/crawler-subsystem/sub_system/time_tianhang.json"
+TIME_FILE_SANZHI="/home/bnu/scrapy/crawler-subsystem/sub_system/time_sanzhi.json"
 
 DRIVER_LINUX="/home/bnu/scrapy/crawler-subsystem/sub_system/geckodriver"
 
 # 用户，密码
-# GPRS
+# TIANHANG
 TIANHANG_USER="20200529"
 TIANHANG_PASSWORD="123456"
 # FANGSHAN

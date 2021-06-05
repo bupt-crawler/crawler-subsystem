@@ -2,13 +2,21 @@
 ## 用法：
 ### 配置项：
 使用前首先要配置路径，如scrapy, geckodriver等的位置
-- 在crawler-subsystem/sub_system/sub_system/settings.py中修改DRIVER_LINUX和TIME_FILE_LINUX，配置geckodriver路径和time.json的路径，其中geckodriver为浏览器驱动（selenium所需），time.json为增量爬取所需的文件，位置任意。
-- 在crawler-subsystem/sub_system/sub_system/settings.py中可以修改GPRS和FangShan的用户名和密码
+- 在crawler-subsystem/sub_system/sub_system/settings.py中修改DRIVER_LINUX和TIME_FILE_TIANHANG，TIME_FILE_SANZHI配置geckodriver路径和time_tianhang.json和time_sanzhi.json的路径，其中geckodriver为浏览器驱动（selenium所需），time_tianhang.json和time_sanzhi.json为增量爬取所需的文件，位置任意。
+- 在crawler-subsystem/sub_system/sub_system/settings.py中可以修改tianhang和sanzhi的用户名和密码
 - 在crawler-subsystem/sub_system/start.sh中修改scrapy路径，logs路径，当前项目路径（均为绝对路径）
 - 在crawler-subsystem/sub_system/start.sh中修改定时时间，类型为crontab表达式
 
-之后运行start.sh即可启动爬虫
+之后运行start.sh + 网站名字即可将爬虫添加到定时任务
+如：
 
+    source start.sh sanzhi #添加西安三智
+    source start.sh tianhang #添加天航
+
+同理，将爬虫从定时任务中移走，只需运行end.sh+网站名字,如
+
+    source end.sh sanzhi #结束西安三智
+    source end.sh tianhang #结束天航
 
 ### 控制爬虫的增量爬取：
 

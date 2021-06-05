@@ -113,7 +113,7 @@ class FlowAreaASpider(scrapy.Spider):
 
     def getOldtime(self):
         # 从本地文件中获取oldtime
-        file = open(TIME_FILE_LINUX, 'r', encoding='utf-8')
+        file = open(TIME_FILE_SANZHI, 'r', encoding='utf-8')
         self.dictime = json.load(file)
         self.oldtime = self.dictime['flowAreaATime']
         self.newtime = self.oldtime
@@ -121,7 +121,7 @@ class FlowAreaASpider(scrapy.Spider):
 
     def updateNewTime(self):
         # 更新本地文件时间记录
-        file = open(TIME_FILE_LINUX, 'w', encoding='utf-8')
+        file = open(TIME_FILE_SANZHI, 'w', encoding='utf-8')
         self.dictime['flowAreaATime'] = self.newtime
         file.write(json.dumps(self.dictime))
         file.close()
