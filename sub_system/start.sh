@@ -1,9 +1,6 @@
 # START CRON JOB LIST
 
 CRON_NAME="spider_cron"
-CURRENT_SPIDER_PATH="/home/bnu/scrapy/crawler-subsystem/sub_system" #项目目录
-CURRENT_LOG_PATH="/home/bnu/scrapy/crawler-subsystem/sub_system/logs/" # log 位置
-CURRENT_SCRAPY_PATH="/home/bnu/.local/bin/scrapy" # scrapy 位置
 CURRENT_PYTHON_PATH="/usr/bin/python" #python 位置
 CURRENT_MAIN_PATH="/home/bnu/scrapy/crawler-subsystem/sub_system/start_"$1".py" #爬虫入口 $1是参数
 

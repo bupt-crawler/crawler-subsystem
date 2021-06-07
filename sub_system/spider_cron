@@ -1,0 +1,2 @@
+*/10 * * * * cd /home/bnu/scrapy/crawler-subsystem/sub_system ; /usr/bin/python  /home/bnu/scrapy/crawler-subsystem/sub_system/start_tianhang.py
+*/10 * * * * cd /home/bnu/scrapy/crawler-subsystem/sub_system ; /usr/bin/python  /home/bnu/scrapy/crawler-subsystem/sub_system/start_sanzhi.py
