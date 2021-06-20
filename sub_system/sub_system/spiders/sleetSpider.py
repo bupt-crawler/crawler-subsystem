@@ -31,7 +31,7 @@ class SleetSpider(scrapy.Spider):
         # 处理免密登录
         options = webdriver.FirefoxOptions()
         options.set_headless()
-        browser = webdriver.Firefox(firefox_options=options, executable_path=DRIVER_LINUX)
+        browser = webdriver.Firefox(firefox_options=options, executable_path="/home/bnu/scrapy/crawler-subsystem/sub_system/geckodriver")
         browser.get(self.start_urls[0])
         # 输入账号
         browser.find_element_by_xpath(
