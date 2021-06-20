@@ -1,8 +1,9 @@
 # START CRON JOB LIST
 
 CRON_NAME="spider_cron"
-CURRENT_PYTHON_PATH="/usr/bin/python" #python 位置
+CURRENT_PYTHON_PATH="/usr/bin/python3" #python 位置
 CURRENT_MAIN_PATH="/home/bnu/scrapy/crawler-subsystem/sub_system/start_"$1".py" #爬虫入口 $1是参数
+CURRENT_SPIDER_PATH="/home/bnu/scrapy/crawler-subsystem/sub_system" #項目目錄
 
 # 并行执行（由于目前版本的时间全部记录在time.json中，所以几个爬虫并行执行时会同时打开这个文件，会出问题。如果
 #          如果要想并行需把time.json里的内容分离。暂时用的是串行执行的方式）
@@ -24,7 +25,7 @@ CURRENT_MAIN_PATH="/home/bnu/scrapy/crawler-subsystem/sub_system/start_"$1".py" 
 
 ## 串行
 # 设置时间
-TIME="*/10 * * * *"
+TIME="*/60 * * * *"
 
 # 判断是否已经启动过该任务，启动过就退出改脚本
 if [ `grep -c "$1" $CRON_NAME` -ne '0' ];then
@@ -32,8 +33,7 @@ if [ `grep -c "$1" $CRON_NAME` -ne '0' ];then
     return
 fi
 
-#没有启动过就启动
-echo "$TIME cd $CURRENT_SPIDER_PATH ; $CURRENT_PYTHON_PATH  $CURRENT_MAIN_PATH" >> $CRON_NAME
+echo "$TIME export DISPLAY=:1 && cd $CURRENT_SPIDER_PATH ; $CURRENT_PYTHON_PATH  $CURRENT_MAIN_PATH" >> $CRON_NAME
 crontab $CRON_NAME
 crontab -l
 sudo /etc/init.d/cron start
