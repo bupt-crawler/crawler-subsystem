@@ -50,7 +50,7 @@ class FlowAreaBSpider(scrapy.Spider):
         for elem in cookie:
             str = elem.split(':')
             self.cookies[str[0]] = str[1]
-        browser.close()
+        browser.quit()
         self.getOldtime()
 
     def start_requests(self):

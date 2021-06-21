@@ -113,7 +113,7 @@ class Device2historyspiderSpider(scrapy.Spider):
             if oldData == True:
                 break
             self.clickAnElement(nextpageBt)
-        self.browser.close()
+        self.browser.quit()
 
     def extractData(self):
         # 从浏览器数据表格中提取数据
