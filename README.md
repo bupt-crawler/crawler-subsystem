@@ -30,3 +30,7 @@ crawler-subsystem/sub_system/time.json文件中控制了所有爬虫的增量爬
 - sleetTime：西安三智-雨雪表
 - device1HistoryTime：北京天航佳德-设备1（黑龙江省嫩江县鹤北径流场17号小区）历史数据
 - device2HistoryTime：北京天航佳德-设备2（北京林业大学）历史数据
+
+To kill firefox task:
+
+    pgrep firefox | xargs kill -s 9

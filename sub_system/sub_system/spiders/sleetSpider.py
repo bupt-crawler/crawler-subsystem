@@ -31,25 +31,25 @@ class SleetSpider(scrapy.Spider):
         # 处理免密登录
         options = webdriver.FirefoxOptions()
         options.set_headless()
-        browser = webdriver.Firefox(firefox_options=options, executable_path="/home/bnu/scrapy/crawler-subsystem/sub_system/geckodriver")
-        browser.get(self.start_urls[0])
+        self.browser = webdriver.Firefox(firefox_options=options, executable_path="/home/bnu/scrapy/crawler-subsystem/sub_system/geckodriver")
+        self.browser.get(self.start_urls[0])
         # 输入账号
-        browser.find_element_by_xpath(
+        self.browser.find_element_by_xpath(
             '//input[@type="text"]').send_keys(self.username)
         # 输入密码
-        browser.find_element_by_xpath(
+        self.browser.find_element_by_xpath(
             '//input[@type="password"]').send_keys(self.password)
         # 点击登陆按钮
-        browser.find_element_by_xpath("//input[@class='submit']").click()
+        self.browser.find_element_by_xpath("//input[@class='submit']").click()
 
         # 获得cookies
-        seleniumCookies = browser.get_cookies()
+        seleniumCookies = self.browser.get_cookies()
         cookie = [item["name"] + ":" + item["value"]
                   for item in seleniumCookies]
         for elem in cookie:
             str = elem.split(':')
             self.cookies[str[0]] = str[1]
-        browser.quit()
+        self.browser.quit()
         self.getOldtime()
 
     def start_requests(self):

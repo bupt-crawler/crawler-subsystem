@@ -25,7 +25,7 @@ CURRENT_SPIDER_PATH="/home/bnu/scrapy/crawler-subsystem/sub_system" #項目目�
 
 ## 串行
 # 设置时间
-TIME="*/60 * * * *"
+TIME="*/10 * * * *"
 
 # 判断是否已经启动过该任务，启动过就退出改脚本
 if [ `grep -c "$1" $CRON_NAME` -ne '0' ];then
@@ -33,7 +33,7 @@ if [ `grep -c "$1" $CRON_NAME` -ne '0' ];then
     return
 fi
 
-echo "$TIME export DISPLAY=:1 && cd $CURRENT_SPIDER_PATH ; $CURRENT_PYTHON_PATH  $CURRENT_MAIN_PATH" >> $CRON_NAME
+echo "$TIME cd $CURRENT_SPIDER_PATH ; $CURRENT_PYTHON_PATH  $CURRENT_MAIN_PATH" >> $CRON_NAME
 crontab $CRON_NAME
 crontab -l
 sudo /etc/init.d/cron start
