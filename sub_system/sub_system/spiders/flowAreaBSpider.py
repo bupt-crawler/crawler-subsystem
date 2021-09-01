@@ -25,13 +25,21 @@ class FlowAreaBSpider(scrapy.Spider):
     cookies = {}
     oldtime = ''  # 本地存储的最新时间
     newtime = ''  # 记录爬取的所有数据中最新的时间
+<<<<<<< HEAD
+=======
+    timeName = "flowAreaBTime"  # 时间字典的key
+>>>>>>> 550e48a172521ee31e1043de80b03376ee3a3996
     dictime = {}  # 从本地文件中获取到的时间字典
 
     def __init__(self, **kwargs):
         # 处理免密登录
         options = webdriver.FirefoxOptions()
         options.set_headless()
+<<<<<<< HEAD
         self.browser = webdriver.Firefox(firefox_options=options, executable_path=DRIVER_LINUX)
+=======
+        self.browser = webdriver.Firefox(firefox_options=options, executable_path=DRIVER_WINDOWS)
+>>>>>>> 550e48a172521ee31e1043de80b03376ee3a3996
        
         self.browser.get(self.start_urls[0])
         # 输入账号
@@ -106,13 +114,21 @@ class FlowAreaBSpider(scrapy.Spider):
         # 从本地文件中获取oldtime
         file = open(TIME_FILE_SANZHI, 'r', encoding='utf-8')
         self.dictime = json.load(file)
+<<<<<<< HEAD
         self.oldtime = self.dictime['flowAreaBTime']
+=======
+        self.oldtime = self.dictime[self.timeName]
+>>>>>>> 550e48a172521ee31e1043de80b03376ee3a3996
         self.newtime = self.oldtime
         file.close()
 
     def updateNewTime(self):
         # 更新本地文件时间记录
         file = open(TIME_FILE_SANZHI, 'w', encoding='utf-8')
+<<<<<<< HEAD
         self.dictime['flowAreaBTime'] = self.newtime
+=======
+        self.dictime[self.timeName] = self.newtime
+>>>>>>> 550e48a172521ee31e1043de80b03376ee3a3996
         file.write(json.dumps(self.dictime))
         file.close()
