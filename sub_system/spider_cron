@@ -1,4 +1,0 @@
-SHELL=/bin/bash
-PATH=/home/bnu/.vscode-server/bin/054a9295330880ed74ceaedda236253b4f39a335/bin:/home/bnu/.local/bin:/home/bnu/.vscode-server/bin/054a9295330880ed74ceaedda236253b4f39a335/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/sbin/cron:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
-*/10 * * * * cd /home/bnu/scrapy/crawler-subsystem/sub_system ; /usr/bin/python3  /home/bnu/scrapy/crawler-subsystem/sub_system/start_sanzhi.py
-*/10 * * * * cd /home/bnu/scrapy/crawler-subsystem/sub_system ; /usr/bin/python3  /home/bnu/scrapy/crawler-subsystem/sub_system/start_tianhang.py
