@@ -17,7 +17,8 @@ except Exception:
 
 
 def add_spider(spider_name):
-    subprocess.Popen(CURRENT_SCRAPY_PATH+" crawl "+spider_name+" >> "+CURRENT_LOG_PATH+spider_name+".log 2>&1",shell=True).wait()
+    subprocess.Popen(CURRENT_SCRAPY_PATH+" crawl "+spider_name+" >> "+CURRENT_LOG_PATH+spider_name+".log 2>&1", shell=True).wait()
+
 
 if __name__ == '__main__':
     add_spider("flowAreaASpider")
