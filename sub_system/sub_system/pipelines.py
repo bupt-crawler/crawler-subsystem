@@ -105,6 +105,7 @@ class Area12HistoryPipeline:
 
     def process_item(self, item, spider):
         # self.kafkaUtils.send(kafka.DEVICE_HISTORY_TWO, json.dumps(dict(item), ensure_ascii=False))
+        item['deviceId'] = 4
         print(item)
         return item
 
@@ -115,6 +116,7 @@ class Area13HistoryPipeline:
 
     def process_item(self, item, spider):
         # self.kafkaUtils.send(kafka.DEVICE_HISTORY_TWO, json.dumps(dict(item), ensure_ascii=False))
+        item['deviceId'] = 5
         print(item)
         return item
 
@@ -125,6 +127,7 @@ class Area14HistoryPipeline:
 
     def process_item(self, item, spider):
         # self.kafkaUtils.send(kafka.DEVICE_HISTORY_TWO, json.dumps(dict(item), ensure_ascii=False))
+        item['deviceId'] = 6
         print(item)
         return item
 
@@ -135,6 +138,7 @@ class Area15HistoryPipeline:
 
     def process_item(self, item, spider):
         # self.kafkaUtils.send(kafka.DEVICE_HISTORY_TWO, json.dumps(dict(item), ensure_ascii=False))
+        item['deviceId'] = 7
         print(item)
         return item
 
@@ -145,6 +149,7 @@ class Area16HistoryPipeline:
 
     def process_item(self, item, spider):
         # self.kafkaUtils.send(kafka.DEVICE_HISTORY_TWO, json.dumps(dict(item), ensure_ascii=False))
+        item['deviceId'] = 8
         print(item)
         return item
 
@@ -156,5 +161,6 @@ class Area17HistoryPipeline:
 
     def process_item(self, item, spider):
         # self.kafkaUtils.send(kafka.DEVICE_HISTORY_TWO, json.dumps(dict(item), ensure_ascii=False))
+        item['deviceId'] = 9
         print(item)
         return item

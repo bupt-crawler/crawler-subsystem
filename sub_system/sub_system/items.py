@@ -76,3 +76,4 @@ class HistoryItem(scrapy.Item):
     runoffDensity = scrapy.Field()  # 径流密度
     deviceV = scrapy.Field()  # 设备电压
     errorCode = scrapy.Field()  # 故障码
+    deviceId = scrapy.Field() # 辨别是哪一个设备

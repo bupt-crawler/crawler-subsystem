@@ -26,7 +26,7 @@ def start():
 
     #暂时用的bnu用户
     my_cron = CronTab(user=SYS_NAME)
-    job = my_cron.new(command=PYTHON_PATH+" "+FILE_PATH,comment=SPIDER_NAME) #注释名称为爬虫名
+    job = my_cron.new(command=PYTHON_PATH+" "+FILE_PATH, comment=SPIDER_NAME) #注释名称为爬虫名
 
     # 暂定每60分钟执行一次
     job.minute.every(60) 
