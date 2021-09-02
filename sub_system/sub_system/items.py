@@ -63,35 +63,15 @@ class sleetItem(scrapy.Item):
     rainSnow = scrapy.Field() # 降雨雪量
     duration = scrapy.Field() # 时长
 
-<<<<<<< HEAD
-class device1HistoryItem(scrapy.Item):
-    id = scrapy.Field() # 编号
-    date = scrapy.Field() # 日期
-    sandMeasureId = scrapy.Field() # 泥沙测量编号
-    genFlowSpace = scrapy.Field() # 产流体积
-    sandContent = scrapy.Field() # 泥沙含量
-    drySandLoss = scrapy.Field() # 干泥沙流失量
-    rainfall = scrapy.Field() # 雨量
-    runoffWeight = scrapy.Field() # 产流重量
-    runoffDensity = scrapy.Field() # 径流密度
-    deviceV = scrapy.Field() # 设备电压
-    errorCode = scrapy.Field() # 故障码
-
-class device2HistoryItem(scrapy.Item):
-=======
 # 天航佳德所有的数据项都一样
 class HistoryItem(scrapy.Item):
->>>>>>> 550e48a172521ee31e1043de80b03376ee3a3996
     id = scrapy.Field()  # 编号
     date = scrapy.Field()  # 日期
     sandMeasureId = scrapy.Field()  # 泥沙测量编号
     genFlowSpace = scrapy.Field()  # 产流体积
     sandContent = scrapy.Field()  # 泥沙含量
     drySandLoss = scrapy.Field()  # 干泥沙流失量
-<<<<<<< HEAD
-=======
     rainfall = scrapy.Field()  # 雨量
->>>>>>> 550e48a172521ee31e1043de80b03376ee3a3996
     runoffWeight = scrapy.Field()  # 产流重量
     runoffDensity = scrapy.Field()  # 径流密度
     deviceV = scrapy.Field()  # 设备电压
