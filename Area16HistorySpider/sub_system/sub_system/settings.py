@@ -1,5 +1,5 @@
 from datetime import datetime
-
+import os
 # Scrapy settings for sub_system project
 #
 # For simplicity, this file contains only settings considered important or
@@ -67,7 +67,7 @@ DEFAULT_REQUEST_HEADERS = {
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'sub_system.pipelines.Area16HistoryPipeline': 200
+    'sub_system.pipelines.sleetPipeline': 200,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -93,17 +93,23 @@ ITEM_PIPELINES = {
 
 TELNETCONSOLE_ENABLED=False
 
+DIR_PATH=os.getcwd()
+
+#项目目录
+PROJECT_PATH=os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+
 # 设置time.json路径
 TIME_FILE= "time.json"
 
-DRIVER_LINUX="/home/bnu/scrapy/crawler-subsystem/sub_system/geckodriver"
-DRIVER_WINDOWS=r"C:\Users\94375\Desktop\Python\water\crawler-subsystem\sub_system\geckodriver.exe"
+DRIVER_LINUX="/usr/local/bin/geckodriver"
+
+DRIVER_WINDOWS=PROJECT_PATH+"/geckodriver.exe"
 
 # 用户，密码
+
 # TIANHANG
 TIANHANG_USER="2020080121"
 TIANHANG_PASSWORD="123456"
-
 
 
 # # 文件及路径，log目录需要先建好
@@ -111,6 +117,13 @@ TIANHANG_PASSWORD="123456"
 # log_file_path = "log/scrapy_{}_{}_{}.log".format(today.year, today.month, today.day)
 # LOG_FILE = log_file_path
 
+
+#日志位置
+today=datetime.now()
+log_file_path=DIR_PATH+"/logs/Area12HistorySpider_{}_{}_{}.log".format(today.year,today.month,today.day)
+
+with open(log_file_path,mode='a',encoding='utf-8') as ff:
+    pass
 # 日志级别 CRITICAL, ERROR, WARNING, INFO, DEBUG
 LOG_LEVEL = 'INFO'
-
+LOG_FILE=log_file_path

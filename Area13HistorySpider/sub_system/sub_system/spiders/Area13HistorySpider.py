@@ -36,10 +36,10 @@ class Area13historyspiderSpider(scrapy.Spider):
             options = webdriver.FirefoxOptions()
             options.set_headless()
             self.browser = webdriver.Firefox(firefox_options=options,
-                                             executable_path=DRIVER_WINDOWS)
+                                             executable_path=DRIVER_LINUX)
 
             # 浏览器可视，便于调试
-            # self.browser = webdriver.Firefox(executable_path= DRIVER_WINDOWS)
+            # self.browser = webdriver.Firefox(executable_path= DRIVER_LINUX)
 
             self.browser.get(url)
             # 输入账号

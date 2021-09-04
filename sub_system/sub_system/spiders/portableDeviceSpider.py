@@ -32,7 +32,7 @@ class PortableDeviceSpider(scrapy.Spider):
             # 处理免密登录
             options = webdriver.FirefoxOptions()
             options.set_headless()
-            self.browser = webdriver.Firefox(firefox_options=options, executable_path=DRIVER_WINDOWS)
+            self.browser = webdriver.Firefox(firefox_options=options, executable_path=DRIVER_LINUX)
 
             self.browser.get(self.start_urls[0])
             # 输入账号

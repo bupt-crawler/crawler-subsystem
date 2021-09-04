@@ -19,16 +19,18 @@ try:
 except Exception:
     print("找不到spider名字")
 
-def start():
-    DIR_PATH=os.getcwd()
-    PYTHON_PATH=sys.executable
-    FILE_PATH=DIR_PATH+"/start_a_spider.py"
+DIR_PATH=os.getcwd()
+PYTHON_PATH=sys.executable
+FILE_PATH=DIR_PATH+"/start_a_spider.py"
+PROJECT_PATH=os.path.abspath(os.path.dirname(os.getcwd()))
 
+def start():
     #暂时用的bnu用户
     my_cron = CronTab(user=SYS_NAME)
-    job = my_cron.new(command=PYTHON_PATH+" "+FILE_PATH, comment=SPIDER_NAME) #注释名称为爬虫名
+    job = my_cron.new(command="cd "+PROJECT_PATH+"; "+PYTHON_PATH+" "+FILE_PATH, comment=SPIDER_NAME) #注释名称为爬虫名
+    # print("cd "+PROJECT_PATH+"; "+PYTHON_PATH+" "+FILE_PATH)
 
-    # 暂定每60分钟执行一次
+    # 暂定每50分钟执行一次
     job.minute.every(50) 
     my_cron.write()
 
