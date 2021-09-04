@@ -125,5 +125,5 @@ log_file_path=DIR_PATH+"/logs/flowAreaBSpider_{}_{}_{}.log".format(today.year,to
 with open(log_file_path,mode='a',encoding='utf-8') as ff:
     pass
 # 日志级别 CRITICAL, ERROR, WARNING, INFO, DEBUG
-LOG_LEVEL = 'INFO'
+LOG_LEVEL = 'ERROR'
 LOG_FILE=log_file_path
