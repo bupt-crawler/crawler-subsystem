@@ -27,98 +27,104 @@ class Area17historyspiderSpider(scrapy.Spider):
     dictime = {}  # 从本地文件中获取到的时间字典
 
     def __init__(self, **kwargs):
-        # 免密登录
-        url = "http://gprs.sj2000.org/Login.aspx"
-        username = TIANHANG_USER
-        password = TIANHANG_PASSWORD
+        try:
+            # 免密登录
+            url = "http://gprs.sj2000.org/Login.aspx"
+            username = TIANHANG_USER
+            password = TIANHANG_PASSWORD
 
-        # 浏览器不可视，用于在服务器运行
-        options = webdriver.FirefoxOptions()
-        options.set_headless()
-        self.browser = webdriver.Firefox(firefox_options=options, executable_path=DRIVER_WINDOWS)
+            # 浏览器不可视，用于在服务器运行
+            options = webdriver.FirefoxOptions()
+            options.set_headless()
+            self.browser = webdriver.Firefox(firefox_options=options, executable_path=DRIVER_WINDOWS)
 
-        # 浏览器可视，便于调试
-        # self.browser = webdriver.Firefox(executable_path= DRIVER_WINDOWS)
+            # 浏览器可视，便于调试
+            # self.browser = webdriver.Firefox(executable_path= DRIVER_WINDOWS)
 
-        self.browser.get(url)
-        # 输入账号
-        self.browser.find_element_by_xpath(
-            '//input[@type="text"]').send_keys(username)
-        # 输入密码
-        self.browser.find_element_by_xpath(
-            '//input[@class="mm"]').send_keys(password)
-        # 点击登陆按钮
-        self.browser.find_element_by_xpath("//input[@id='btnLogin']").click()
-        self.getOldtime()
+            self.browser.get(url)
+            # 输入账号
+            self.browser.find_element_by_xpath(
+                '//input[@type="text"]').send_keys(username)
+            # 输入密码
+            self.browser.find_element_by_xpath(
+                '//input[@class="mm"]').send_keys(password)
+            # 点击登陆按钮
+            self.browser.find_element_by_xpath("//input[@id='btnLogin']").click()
+            self.getOldtime()
+        except:
+            self.browser.quit()
+
 
     def start_requests(self):
         yield scrapy.FormRequest(self.start_urls[0], callback=self.browserfun)
 
     def browserfun(self, response):
-        # 模拟浏览器操作:选择开始日期，点击查询按钮，使数据显示在表格中
-        self.browser.get(self.start_urls[0])
-        # 点击日期选择
-        imgBt = self.browser.find_element_by_xpath(
-            "//img[@src=\"data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\"]")
-        self.clickAnElement(imgBt)
-        time.sleep(1)
-        # 点击年和月选择
-        yearAndMonthBt = self.browser.find_element_by_xpath("//button[@class=\" x-btn-text\"]")
-        self.clickAnElement(yearAndMonthBt)
-        time.sleep(1)
-        # 选择2018年,一个较早的年份
-        tdList = self.browser.find_elements_by_tag_name('td')
-        tdyear2018 = 0
-        for td in tdList:
-            if td.text == '2018':
-                tdyear2018 = td
-                break
-        self.clickAnElement(tdyear2018)
-        time.sleep(1)
-        # 点击确定，选择年月完毕
-        okBt = self.browser.find_element_by_xpath("//button[@class=\"x-date-mp-ok\"]")
-        self.clickAnElement(okBt)
-        time.sleep(1)
-        # 选择日历上的第一项
-        a = self.browser.find_element_by_xpath("//a[@class=\"x-date-date\"]")
-        self.clickAnElement(a)
-        time.sleep(1)
-        # 点击查询按钮
-        submitBt = self.browser.find_element_by_xpath("//button[@class=\' x-btn-text icon-pagefind\']")
-        self.clickAnElement(submitBt)
-        time.sleep(1)
-        # 获取下一页按钮
-        nextpageBt = self.browser.find_element_by_xpath("//button[@class=\' x-btn-text x-tbar-page-next\']")
-        # 获取总页数
-        l = self.browser.find_elements_by_class_name('xtb-text')
-        page = int(re.search(r'共 \d+ 页', l[1].text).group(0)[2:-2])
-        # 获取刷新按钮
-        refresh = self.browser.find_element_by_xpath("//button[@class=\' x-btn-text x-tbar-loading\']")
-        # 一页一页的处理数据
-        for i in range(page):
-            time.sleep(0.5)
-            itemList = self.extractData()
-            # 如果没取到数据，就刷新网页
-            while len(itemList) == 0:
-                self.clickAnElement(refresh)
-                itemList = self.extractData()
-            # 从数据列表中yield Item
-            oldData = False
-            for item in itemList:
-                # 当数据为新数据时才获取
-                if item['date'] > self.oldtime:
-                    if item['date'] > self.newtime:
-                        self.newtime = item['date']
-                    yield item
-                # 当数据为老数据时，不获取
-                else:
-                    oldData = True
+        try:
+            # 模拟浏览器操作:选择开始日期，点击查询按钮，使数据显示在表格中
+            self.browser.get(self.start_urls[0])
+            # 点击日期选择
+            imgBt = self.browser.find_element_by_xpath(
+                "//img[@src=\"data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\"]")
+            self.clickAnElement(imgBt)
+            time.sleep(1)
+            # 点击年和月选择
+            yearAndMonthBt = self.browser.find_element_by_xpath("//button[@class=\" x-btn-text\"]")
+            self.clickAnElement(yearAndMonthBt)
+            time.sleep(1)
+            # 选择2018年,一个较早的年份
+            tdList = self.browser.find_elements_by_tag_name('td')
+            tdyear2018 = 0
+            for td in tdList:
+                if td.text == '2018':
+                    tdyear2018 = td
                     break
-            # 如果当前页面获取到的数据已经为老数据，就不再继续往下翻页获取了
-            if oldData == True:
-                break
-            self.clickAnElement(nextpageBt)
-        self.browser.quit()
+            self.clickAnElement(tdyear2018)
+            time.sleep(1)
+            # 点击确定，选择年月完毕
+            okBt = self.browser.find_element_by_xpath("//button[@class=\"x-date-mp-ok\"]")
+            self.clickAnElement(okBt)
+            time.sleep(1)
+            # 选择日历上的第一项
+            a = self.browser.find_element_by_xpath("//a[@class=\"x-date-date\"]")
+            self.clickAnElement(a)
+            time.sleep(1)
+            # 点击查询按钮
+            submitBt = self.browser.find_element_by_xpath("//button[@class=\' x-btn-text icon-pagefind\']")
+            self.clickAnElement(submitBt)
+            time.sleep(1)
+            # 获取下一页按钮
+            nextpageBt = self.browser.find_element_by_xpath("//button[@class=\' x-btn-text x-tbar-page-next\']")
+            # 获取总页数
+            l = self.browser.find_elements_by_class_name('xtb-text')
+            page = int(re.search(r'共 \d+ 页', l[1].text).group(0)[2:-2])
+            # 获取刷新按钮
+            refresh = self.browser.find_element_by_xpath("//button[@class=\' x-btn-text x-tbar-loading\']")
+            # 一页一页的处理数据
+            for i in range(page):
+                time.sleep(0.5)
+                itemList = self.extractData()
+                # 如果没取到数据，就刷新网页
+                while len(itemList) == 0:
+                    self.clickAnElement(refresh)
+                    itemList = self.extractData()
+                # 从数据列表中yield Item
+                oldData = False
+                for item in itemList:
+                    # 当数据为新数据时才获取
+                    if item['date'] > self.oldtime:
+                        if item['date'] > self.newtime:
+                            self.newtime = item['date']
+                        yield item
+                    # 当数据为老数据时，不获取
+                    else:
+                        oldData = True
+                        break
+                # 如果当前页面获取到的数据已经为老数据，就不再继续往下翻页获取了
+                if oldData == True:
+                    break
+                self.clickAnElement(nextpageBt)
+        finally:
+            self.browser.quit()
 
     def extractData(self):
         # 从浏览器数据表格中提取数据
