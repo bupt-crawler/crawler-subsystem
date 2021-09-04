@@ -12,7 +12,6 @@ import sub_system.kafka_utils as kafka
 from collections import Counter
 
 
-
 class flowAreaBPipeline:
     def __init__(self):
         self.kafkaUtils = kafka.KafKaUtils()

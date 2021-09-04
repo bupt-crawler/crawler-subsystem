@@ -1,16 +1,8 @@
 from kafka import KafkaProducer
 
 KAFKA_HOST = '112.98.239.146:9092'
-FLOW_AREA_A_TOPIC = 'flow_area_a'
-FLOW_AREA_B_TOPIC = 'flow_area_b'
-PORTABLE_DEVICE_TOPIC = 'portable_device'
-SLEET_TOPIC = 'sleet'
 AREA12 = 'area12'
-AREA13 = 'area13'
-AREA14 = 'area14'
-AREA15 = 'area15'
-AREA16 = 'area16'
-AREA17 = 'area17'
+
 
 
 

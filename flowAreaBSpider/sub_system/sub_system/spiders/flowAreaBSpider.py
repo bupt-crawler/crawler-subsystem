@@ -29,30 +29,32 @@ class FlowAreaBSpider(scrapy.Spider):
     dictime = {}  # 从本地文件中获取到的时间字典
 
     def __init__(self, **kwargs):
-        # 处理免密登录
-        options = webdriver.FirefoxOptions()
-        options.set_headless()
-        self.browser = webdriver.Firefox(firefox_options=options, executable_path=DRIVER_LINUX)
-       
-        self.browser.get(self.start_urls[0])
-        # 输入账号
-        self.browser.find_element_by_xpath(
-            '//input[@type="text"]').send_keys(self.username)
-        # 输入密码
-        self.browser.find_element_by_xpath(
-            '//input[@type="password"]').send_keys(self.password)
-        # 点击登陆按钮
-        self.browser.find_element_by_xpath("//input[@class='submit']").click()
+        try:
+            # 处理免密登录
+            options = webdriver.FirefoxOptions()
+            options.set_headless()
+            self.browser = webdriver.Firefox(firefox_options=options, executable_path=DRIVER_LINUX)
 
-        # 获得cookies
-        seleniumCookies = self.browser.get_cookies()
-        cookie = [item["name"] + ":" + item["value"]
-                  for item in seleniumCookies]
-        for elem in cookie:
-            str = elem.split(':')
-            self.cookies[str[0]] = str[1]
-        self.browser.quit()
-        self.getOldtime()
+            self.browser.get(self.start_urls[0])
+            # 输入账号
+            self.browser.find_element_by_xpath(
+                '//input[@type="text"]').send_keys(self.username)
+            # 输入密码
+            self.browser.find_element_by_xpath(
+                '//input[@type="password"]').send_keys(self.password)
+            # 点击登陆按钮
+            self.browser.find_element_by_xpath("//input[@class='submit']").click()
+
+            # 获得cookies
+            seleniumCookies = self.browser.get_cookies()
+            cookie = [item["name"] + ":" + item["value"]
+                      for item in seleniumCookies]
+            for elem in cookie:
+                str = elem.split(':')
+                self.cookies[str[0]] = str[1]
+            self.getOldtime()
+        finally:
+            self.browser.quit()
 
     def start_requests(self):
         yield scrapy.FormRequest(self.start_urls[0], cookies=self.cookies, callback=self.parseTotalPage,

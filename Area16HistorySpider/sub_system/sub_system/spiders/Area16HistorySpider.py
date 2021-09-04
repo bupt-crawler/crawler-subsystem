@@ -51,7 +51,7 @@ class Area16historyspiderSpider(scrapy.Spider):
             # 点击登陆按钮
             self.browser.find_element_by_xpath("//input[@id='btnLogin']").click()
             self.getOldtime()
-        finally:
+        except:
             self.browser.quit()
 
     def start_requests(self):

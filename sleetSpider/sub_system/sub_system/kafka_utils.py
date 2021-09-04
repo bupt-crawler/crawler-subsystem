@@ -1,11 +1,6 @@
 from kafka import KafkaProducer
 
 KAFKA_HOST = '112.98.239.146:9092'
-DEVICE_HISTORY_ONE = 'device_history_one'
-DEVICE_HISTORY_TWO = 'device_history_two'
-FLOW_AREA_A_TOPIC = 'flow_area_a'
-FLOW_AREA_B_TOPIC = 'flow_area_b'
-PORTABLE_DEVICE_TOPIC = 'portable_device'
 SLEET_TOPIC = 'sleet'
 
 

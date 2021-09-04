@@ -213,7 +213,7 @@ class Area12historyspiderSpider(scrapy.Spider):
 
     def getOldtime(self):
         # 从本地文件中获取oldtime
-        file = open(TIME_FILE_TIANHANG, 'r', encoding='utf-8')
+        file = open(TIME_FILE, 'r', encoding='utf-8')
         self.dictime = json.load(file)
         self.oldtime = self.dictime[self.timeName]
         self.newtime = self.oldtime
@@ -221,7 +221,7 @@ class Area12historyspiderSpider(scrapy.Spider):
 
     def updateNewTime(self):
         # 更新本地文件时间记录
-        file = open(TIME_FILE_TIANHANG, 'w', encoding='utf-8')
+        file = open(TIME_FILE, 'w', encoding='utf-8')
         self.dictime[self.timeName] = self.newtime
         file.write(json.dumps(self.dictime))
         file.close()

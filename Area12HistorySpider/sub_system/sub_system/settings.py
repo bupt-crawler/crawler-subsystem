@@ -67,18 +67,7 @@ DEFAULT_REQUEST_HEADERS = {
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'sub_system.pipelines.JsonPipeline': 200,
-    'sub_system.pipelines.SubSystemPipeline': 300,
-    'sub_system.pipelines.flowAreaAPipeline': 200,
-    'sub_system.pipelines.flowAreaBPipeline': 200,
-    'sub_system.pipelines.portableDevicePipeline': 200,
-    'sub_system.pipelines.sleetPipeline': 200,
     'sub_system.pipelines.Area12HistoryPipeline': 200,
-    'sub_system.pipelines.Area13HistoryPipeline': 200,
-    'sub_system.pipelines.Area14HistoryPipeline': 200,
-    'sub_system.pipelines.Area15HistoryPipeline': 200,
-    'sub_system.pipelines.Area16HistoryPipeline': 200,
-    'sub_system.pipelines.Area17HistoryPipeline': 200
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -106,19 +95,14 @@ TELNETCONSOLE_ENABLED=False
 
 # 设置time.json路径
 TIME_FILE= "time.json"
-TIME_FILE_TIANHANG= r"C:\Users\94375\Desktop\Python\water\crawler-subsystem\sub_system\time_tianhang.json"
-TIME_FILE_SANZHI= r"C:\Users\94375\Desktop\Python\water\crawler-subsystem\sub_system\time_sanzhi.json"
 
 DRIVER_LINUX="/home/bnu/scrapy/crawler-subsystem/sub_system/geckodriver"
-DRIVER_WINDOWS=r"C:\Users\94375\Desktop\Python\water\crawler-subsystem\sub_system\geckodriver.exe"
+DRIVER_WINDOWS="geckodriver.exe"
 
 # 用户，密码
 # TIANHANG
 TIANHANG_USER="2020080121"
 TIANHANG_PASSWORD="123456"
-# FANGSHAN
-SANZHI_USER='fangshan'
-SANZHI_PASSWORD='123456'
 
 
 # # 文件及路径，log目录需要先建好
