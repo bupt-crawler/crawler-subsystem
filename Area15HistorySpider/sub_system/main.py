@@ -27,7 +27,7 @@ PROJECT_PATH=os.path.abspath(os.path.dirname(os.getcwd()))
 def start():
     #暂时用的bnu用户
     my_cron = CronTab(user=SYS_NAME)
-    job = my_cron.new(command="cd "+PROJECT_PATH+"; "+PYTHON_PATH+" "+FILE_PATH, comment=SPIDER_NAME) #注释名称为爬虫名
+    job = my_cron.new(command="cd "+PROJECT_PATH+" ; "+PYTHON_PATH+" "+FILE_PATH, comment=SPIDER_NAME) #注释名称为爬虫名
     # print("cd "+PROJECT_PATH+"; "+PYTHON_PATH+" "+FILE_PATH)
 
     # 暂定每50分钟执行一次

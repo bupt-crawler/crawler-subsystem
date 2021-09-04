@@ -120,7 +120,7 @@ TIANHANG_PASSWORD="123456"
 
 #日志位置
 today=datetime.now()
-log_file_path=DIR_PATH+"/logs/Area12HistorySpider_{}_{}_{}.log".format(today.year,today.month,today.day)
+log_file_path=DIR_PATH+"/logs/Area15HistorySpider_{}_{}_{}.log".format(today.year,today.month,today.day)
 
 with open(log_file_path,mode='a',encoding='utf-8') as ff:
     pass
