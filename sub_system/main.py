@@ -29,7 +29,7 @@ def start():
     job = my_cron.new(command=PYTHON_PATH+" "+FILE_PATH, comment=SPIDER_NAME) #注释名称为爬虫名
 
     # 暂定每60分钟执行一次
-    job.minute.every(60) 
+    job.minute.every(50) 
     my_cron.write()
 
 def end():
