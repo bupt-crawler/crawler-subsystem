@@ -31,7 +31,7 @@ def start():
     # print("cd "+PROJECT_PATH+"; "+PYTHON_PATH+" "+FILE_PATH)
 
     # 暂定每50分钟执行一次
-    job.minute.every(50) 
+    job.minute.every(5) 
     my_cron.write()
 
 def end():
